@@ -48,6 +48,7 @@
   height: 64px;
 }
 
+
 .user-avatar.small {
   width: 32px;
   height: 32px;
@@ -63,3 +64,10 @@
   justify-content: space-around;
   margin-bottom: 10px;
 }
+.avatar {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+}
+
+

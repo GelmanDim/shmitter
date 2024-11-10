@@ -1,10 +1,27 @@
-import {useContext} from "react";
-import {TwitterContext} from "../utils/context.js";
+import React, { useContext } from 'react';
+import { TwitterContext } from '../utils/context.js';
 
-const Avatar = ({size}) => {
-    const {user} = useContext(TwitterContext);
+const Avatar = ({ size }) => {
+    const { user, setUser } = useContext(TwitterContext);
+
+    const newAvatar = () => {
+        const newAvatarUrl = prompt("Enter new URL:");
+        if (newAvatarUrl) {
+            setUser({
+                name:user.name,
+                avatar: newAvatarUrl,
+            });
+        }
+    };
+
     return (
-        <img className={`user-avatar ${size ?? ''}`} src={user.avatar} alt={user.name}/>
+        <img
+            src={user.avatar}
+            alt="User Avatar"
+            className={`user-avatar ${size}`}
+            onClick={newAvatar}
+            style={{ cursor: 'pointer' }}
+        />
     );
 };
 
