@@ -12,18 +12,29 @@ function App() {
     });
 
     const [stats, setStats] = useState({
-        followers: 10,
-        following: 100
+        followers: 0,
+        following: 0
     });
 
     const changeAvatar = url => {
-        setUser(prevState => ({...prevState, avatar: url || prevState.avatar}));
-    }
+        const newName = prompt('Enter name');
+        setUser(prevState => ({...prevState, avatar: url || prevState.avatar, name: newName || prevState.name
+        }));
+    };
+
+    const updateFollowers = (increase) => {
+        setStats(prevStats => {
+            let newFollowers = prevStats.followers + increase;
+            if (newFollowers < 0) newFollowers = 0;
+            return { ...prevStats, followers: newFollowers };
+        });
+    };
+
 
     return (
         <div className={'app'}>
             <TwitterContext.Provider value={{
-                user, stats, changeAvatar
+                user, stats, changeAvatar, updateFollowers
             }}>
                 <Navigation/>
                 <Body/>

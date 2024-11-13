@@ -3,7 +3,16 @@ import {useContext} from "react";
 import {TwitterContext} from "../utils/context.js";
 
 const Stats = () => {
-    const {user, stats} = useContext(TwitterContext);
+    const {user, stats, updateFollowers} = useContext(TwitterContext);
+
+    const handleFollowersClick = (event) => {
+        if (event.type === 'click') {
+            updateFollowers(1);
+        } else if (event.type === 'contextmenu') {
+            event.preventDefault();
+            updateFollowers(-1);
+        }
+    };
 
     return (
         <div className={'user-stats'}>
@@ -12,7 +21,7 @@ const Stats = () => {
                 {user.name}
             </div>
             <div className={'stats'}>
-                <div>
+                <div onClick={handleFollowersClick} onContextMenu={handleFollowersClick}>
                     Followers: {stats.followers}
                 </div>
                 <div>
